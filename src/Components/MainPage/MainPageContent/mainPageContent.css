@@ -1,0 +1,71 @@
+.MainPageContent {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  height: 1860px;
+  width: 100%;
+  background-color: red;
+}
+
+.RightText {
+  right: 4%;
+}
+.LeftText {
+  left: 6%;
+}
+
+.picRight {
+  left: 3%;
+}
+.picLeft {
+  right: 4%;
+}
+
+.pitureInContent {
+  position: absolute;
+  width: 42%;
+  max-height: 455px;
+}
+
+.contentSector {
+  z-index: 2;
+  left: 0;
+  height: 455px;
+  width: 100%;
+  background-color: var(--background);
+  color: var(--main-text);
+  font-style: normal;
+  line-height: normal;
+}
+
+.textInContentSector {
+  position: absolute;
+  max-height: 455px;
+  width: 42%;
+  height: 100%;
+  display: inline-block;
+  padding-top: 100px;
+}
+
+.bigTextInContentSector {
+  width: 100%;
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  font-family: Aktiv Grotesk Corp;
+}
+
+.smallTextInContentSector {
+  width: 100%;
+  font-size: 30px;
+  font-weight: 400;
+  font-family: Aktiv Grotesk Corp1;
+}
+
+.myLine {
+  width: 100%;
+  height: 10px;
+  background: var(--my-line);
+  border: 0;
+  margin: 0;
+}

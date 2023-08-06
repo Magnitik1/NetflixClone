@@ -1,0 +1,14 @@
+:root {
+  --logo-text: #ff9f00;
+  --main-text: white;
+  --background: black;
+  --questions-color: #303030;
+  --my-line: #323232;
+}
+
+body {
+  background: var(--background);
+  margin-top: -1px;
+  margin-left: -1px;
+  width: calc(100% + 1px);
+}
