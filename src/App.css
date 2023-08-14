@@ -10,5 +10,9 @@ body {
   background: var(--background);
   margin-top: -1px;
   margin-left: -1px;
+  margin-bottom: 0;
   width: calc(100% + 1px);
+  /* min-width: 1135px;
+  width: auto !important; */
 }
+

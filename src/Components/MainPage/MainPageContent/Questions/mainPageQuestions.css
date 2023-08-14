@@ -1,0 +1,77 @@
+.MainPageQuestions {
+  color: white;
+  width: 62%;
+  margin-left: 19%;
+  text-align: center;
+  font-family: Aktiv Grotesk Corp1;
+}
+
+.MainPageQuestions li {
+  list-style-type: none;
+  width: inherit;
+  background: var(--questions-color);
+  color: var(--main-color);
+  padding-left: 42px;
+  margin-top: 10px;
+  text-align: left;
+  height: 98px;
+  cursor: pointer;
+}
+
+li a {
+  margin-top: 33px;
+  position: absolute;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.3px;
+}
+.questions {
+  width: 727px;
+  height: 51px;
+  flex-shrink: 0;
+  color: var(--main-color);
+  font-family: Aktiv Grotesk Corp;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2.5px;
+}
+
+li .plus {
+  right: 23%;
+  font-size: 80px;
+  margin-top: 0px;
+  user-select: none;
+}
+
+.questionContent {
+  margin-top: 33px;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.3px;
+}
+
+.myLine2 {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 12px;
+  background: #595959;
+  border: 0;
+  margin: 0;
+}
+
+.email-adress2{
+    width: 714px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: var(--main-text);
+    z-index: 2;
+    margin-left: calc(50% - 357px);
+}

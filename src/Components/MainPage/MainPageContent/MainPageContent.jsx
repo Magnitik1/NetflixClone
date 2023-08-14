@@ -3,6 +3,7 @@ import WatchEverywhere from "../picsAndFonts/WatchEverywhere.png";
 import EnjoyOnYourTV from "../picsAndFonts/EnjoyOnYourTV.png";
 import Children from "../picsAndFonts/Children.png";
 import DownloadApp from "../picsAndFonts/DownloadApp.png";
+import { MainPageQuestions } from "./Questions/MainPageQuestions";
 
 function MainPageContent(props) {
   let content = [6, 8, 10, 12].map((e) => {
@@ -26,9 +27,11 @@ function MainPageContent(props) {
     );
   });
 
+  
   return <div className="MainPageContent">
     {content}
     <hr className="myLine" />
+    <MainPageQuestions lang={props.lang} changeLang={props.changeLang}/>
     </div>;
 }
 
