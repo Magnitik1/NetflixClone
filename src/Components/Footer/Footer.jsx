@@ -27,20 +27,18 @@ function Footer(props) {
                   src={planet}
                   style={{
                     width: "16px",
-                    position: "absolute",
-                    top: "11px",
-                    left: "6px",
+                    marginBottom:"-1px",
+                    marginLeft: "-3px",
+                    marginRight: "3px"
                   }}
                 />
-                {props.lang[0]}
+                {props.lang[0]}&nbsp;
               </a>
               <img
                 src={down}
                 style={{
+                  marginBottom:"-2px",
                   width: "14px",
-                  position: "absolute",
-                  top: "12.5px",
-                  marginLeft: "4px",
                 }}
               />
             </button>
