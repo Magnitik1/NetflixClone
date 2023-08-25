@@ -1,16 +1,15 @@
 import MainPageTop from "./MainPageTop/MainPageTop";
 import MainPageContent from "./MainPageContent/MainPageContent";
-import { useState } from "react";
-import { text } from "../Redux.js";
 import Footer from "../Footer/Footer";
 
+
 function MainPage(props) {
-  let [lang, changeLang] = useState(text.ENG);
+
   return (
     <div>
-      <MainPageTop lang={lang} changeLang={changeLang}/>
-      <MainPageContent lang={lang} changeLang={changeLang}/>
-      <Footer lang={lang} text={text} changeLang={changeLang}/>
+      <MainPageTop lang={props.lang} changeLang={props.changeLang}/>
+      <MainPageContent lang={props.lang} changeLang={props.changeLang}/>
+      <Footer lang={props.lang} changeLang={props.changeLang} text={props.text}/>
     </div>
   );
 }

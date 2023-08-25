@@ -35,7 +35,7 @@ export const text = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam", //23
     "Some question ytre fdhs sghfdg sdfh sds", //24
     "Some question 4 sdg dfgsreg vgrew vatryhhjyrs asghrtb shyestwafvtgs4rtg trhgfv sertgb tfgb", //25
-    "Some question 5 savgwt reyvgb rtqv fgfvcfeg br cx", //26    
+    "Some question 5 savgwt reyvgb rtqv fgfvcfeg br cx", //26
     "Questions? Call 000-800-1843", //27
     "FAQ", //28
     "Investor Relations", //29
@@ -90,7 +90,7 @@ export const text = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam", //23
     "Some question ytre fdhs sghfdg sdfh sds", //24
     "Some question 4 sdg dfgsreg vgrew vatryhhjyrs asghrtb shyestwafvtgs4rtg trhgfv sertgb tfgb", //25
-    "Some question 5 savgwt reyvgb rtqv fgfvcfeg br cx", //26    
+    "Some question 5 savgwt reyvgb rtqv fgfvcfeg br cx", //26
     "Питання? Дзвони 000-800-1843", //27
     "FAQ", //28
     "Відносини з інвесторами", //29
@@ -110,3 +110,4 @@ export const text = {
     "якийсь текст", //43
   ],
 };
+

@@ -1,10 +1,11 @@
 import "./footer.css";
 import planet from "../MainPage/picsAndFonts/planet.png";
 import down from "../MainPage/picsAndFonts/down.png";
+import React from "react";
 
 function Footer(props) {
   let ChangeLanguage = (e) => {
-    if (e === "English") {
+    if (e === props.text.ENG[0]) {
       props.changeLang(props.text.ENG);
     } else {
       props.changeLang(props.text.UA);
@@ -27,9 +28,9 @@ function Footer(props) {
                   src={planet}
                   style={{
                     width: "16px",
-                    marginBottom:"-1px",
+                    marginBottom: "-1px",
                     marginLeft: "-3px",
-                    marginRight: "3px"
+                    marginRight: "3px",
                   }}
                 />
                 {props.lang[0]}&nbsp;
@@ -37,7 +38,7 @@ function Footer(props) {
               <img
                 src={down}
                 style={{
-                  marginBottom:"-2px",
+                  marginBottom: "-2px",
                   width: "14px",
                 }}
               />
@@ -55,9 +56,9 @@ function Footer(props) {
               </p>
             </div>
           </div>
-          <br/>
-          
-          <br/>
+          <br />
+
+          <br />
         </ul>
       </div>
       <div className="col2">
@@ -81,7 +82,14 @@ function Footer(props) {
           <li>{props.lang[40]}</li>
           <li>{props.lang[41]}</li>
           <li>{props.lang[42]}</li>
-          <a style={{fontSize:"14px", position:"absolute", bottom:"-100px"}}>FlixUA Ukraine</a>
+          <a
+            style={{
+              fontSize: "14px",
+              position: "absolute",
+              bottom: "-100px",
+            }}>
+            FlixUA Ukraine
+          </a>
         </ul>
       </div>
     </div>

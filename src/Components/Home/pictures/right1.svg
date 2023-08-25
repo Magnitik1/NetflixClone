@@ -1,0 +1,14 @@
+<svg width="103" height="295" xmlns="http://www.w3.org/2000/svg">
+ <title>keyboard_arrow_right</title>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="297" width="105" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" id="svg_1" d="m1.3103,261.041589l63.500984,-112.335526l-63.500984,-112.335526l19.434563,-34.380442l82.935547,146.715967l-82.935547,146.715967l-19.434563,-34.380442z"/>
+  <path d="m0,30.40625c0.875,-0.375 2.509782,-0.823261 4.625,-1.25c2.764431,-0.557714 5.247245,-0.937473 7.375,-1c2.124084,-0.06242 3.875,0 5.125,0c0.75,0 0.911612,0.036612 1,0.125c0.088388,0.088388 0.25,0.125 0.375,0.125l0.125,0" id="svg_2" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="null" fill="none"/>
+  <path d="m11,30.40625c0.125,0 0.207267,-0.045877 0.875,-0.625c0.472158,-0.409502 0.714873,-0.788776 1.125,-1.125c0.34854,-0.285734 0.875,-0.5 0.875,-0.5l0,0" id="svg_3" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="null" fill="none"/>
+ </g>
+</svg>

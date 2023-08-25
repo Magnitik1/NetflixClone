@@ -15,7 +15,7 @@ export function MainPageQuestions(props) {
             update(!_);
           }}>
           <a>{props.lang[e]}</a>
-          <a className="plus">+</a>
+          <a className="plus" style={answerPositions[e - 15]?{}:{}}>{answerPositions[e - 15]?'-':'+'}</a>
         </li>
         {answerPositions[e - 15] ? (
           <div className="questionContent">

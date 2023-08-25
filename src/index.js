@@ -1,12 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import MainPage from "./Components/MainPage/MainPage";
-import Authorization from "./Components/Authorization/Authorization";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import './Components/Authorization/firebase';
+import { Provider } from 'react-redux';
+import { store } from "./Components/Authorization/store";
+import './Components/Authorization/firebase';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App MainPage={<MainPage/>} Authorization={<Authorization/>}/>
+    <Provider store={store}>
+      <App />
+    </Provider> 
   </React.StrictMode>
 );

@@ -1,0 +1,37 @@
+.plan-selection-container {
+    text-align: center;
+  }
+  
+  .plan-selection-header {
+    margin-bottom: 20px;
+  }
+  
+  .step-text {
+    font-size: 14px;
+  }
+  
+  .plan-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .plan-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .plan-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .checkmark {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .plan-description {
+    font-size: 16px;
+  }
+  

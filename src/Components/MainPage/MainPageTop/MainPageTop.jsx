@@ -12,11 +12,14 @@ function MainPageTop(props) {
       props.changeLang(text.UA);
     }
   };
+
+
   return (
     <div className="MainPageTop">
       <a className="logo">FLIXUA</a>
       <button className="sign-in-button">
-        <Link to="/Authorization" className="sign-in-text">
+        <Link to="/register" className="sign-in-text">
+        {/* <Link to="/Home" className="sign-in-text"> */}
           Sign In
         </Link>
       </button>
