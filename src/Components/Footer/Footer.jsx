@@ -88,7 +88,7 @@ function Footer(props) {
               position: "absolute",
               bottom: "-100px",
             }}>
-            FlixUA Ukraine
+            FlixUA Ukraine 
           </a>
         </ul>
       </div>

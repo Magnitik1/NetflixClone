@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 function TopFilm(props) {
   let [topFilm, setTopFilm] = useState(0);
-  let height=360;
-  console.log(props.FilmsInfo[0].title.length)
   return (
     <div className="mainPicConteiner" style={{ cursor: "pointer" }} onClick={()=>{
       if(topFilm>=19){setTopFilm(0)}
@@ -19,7 +17,7 @@ function TopFilm(props) {
       <div className="TopFilmInfo" style={props.FilmsInfo[topFilm].title.length>20?{}:{top:"320px"}}>
         <a style={{fontSize:"50px"}}>{props.FilmsInfo[topFilm].title}</a>
         <br />
-        <Link to="/WatchFilm">
+        <Link onClick={()=>props.setSelectedFilm(topFilm)} to="/WatchFilm">
           <Button
             variant="contained"
             style={{ margin: "10px", background: "white", color: "black" }}>

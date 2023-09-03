@@ -18,7 +18,7 @@ function MainPageTop(props) {
     <div className="MainPageTop">
       <a className="logo">FLIXUA</a>
       <button className="sign-in-button">
-        <Link to="/register" className="sign-in-text">
+        <Link to="/LogIn" className="sign-in-text">
         {/* <Link to="/Home" className="sign-in-text"> */}
           Sign In
         </Link>

@@ -1,7 +1,10 @@
 import React from 'react';
-import './PlanSelection.css';
+import './planSelectionInfo.css';
+import { useNavigate } from 'react-router-dom';
 
-const PlanSelection = () => {
+
+const PlanSelectionInfo = (props) => {
+  let navigate = useNavigate();
   return (
     <div className="plan-selection-container">
       <div className="plan-selection-header">
@@ -28,8 +31,9 @@ const PlanSelection = () => {
           </span>
         </li>
       </ul>
+      <button className="sign-in-button1" onClick={()=>navigate('/PlanSelection')}>Next</button>
     </div>
   );
 };
 
-export default PlanSelection;
+export default PlanSelectionInfo;

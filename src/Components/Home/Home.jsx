@@ -7,7 +7,6 @@ import "./Home.css";
 import Footer from "../Footer/Footer.jsx";
 import { Link } from "react-router-dom";
 
-
 function Home(props) {
   let count = 0;
   let data = [{}, {}, {}, {}, {}, {}];
@@ -37,39 +36,40 @@ function Home(props) {
           width: "40px",
           position: "absolute",
         }}>
-        <img src={right} style={{height:"50%", width: "100%" }} />
+        <img src={right} style={{ height: "50%", width: "100%" }} />
       </Button>
       {data.map((e) => {
-        if (count < 5*(row+1)) {
+        if (count < 5 * (row + 1)) {
           count++;
           return (
-            <Link to="/WatchFilm">
-            <div className="filmsContainer">
-            <img
-              src={
-                "https://image.tmdb.org/t/p/w500/" +
-                props.FilmsInfo[count-1].poster_path
-              }
-              onClick={() => {
-                console.log(props.FilmsInfo);
-              }}
-              className="films"
-            />
-            </div>
+            <Link id={count-1} onClick={(e)=>{props.setSelectedFilm(e.currentTarget.id)}} to="/WatchFilm">
+              <div className="filmsContainer">
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w500/" +
+                    props.FilmsInfo[count - 1].poster_path
+                  }
+                  className="films"
+                />
+              </div>
             </Link>
           );
         }
       })}
     </>
   );
-    let row = 0;
+  let row = 0;
   return (
     <div className="wrapper">
       <Top />
-      <TopFilm  FilmsInfo={props.FilmsInfo}/>
+      <TopFilm
+        FilmsInfo={props.FilmsInfo}
+        selectedFilm={props.selectedFilm}
+        setSelectedFilm={props.setSelectedFilm}
+      />
       {sections.map((e) => {
         let j = 1;
-        if ((props.lang == props.text.UA)) {
+        if (props.lang == props.text.UA) {
           j = 0;
         } else {
           j = 1;

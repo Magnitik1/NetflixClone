@@ -3,14 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import MainPage from "./Components/MainPage/MainPage";
 import WatchFilm from "./Components/Home/WatchFilm/WatchFilm";
-import axios from "axios";
 import React, { useState } from "react";
 import { text } from "./Components/Redux";
-
-import HomePage from "./Components/Authorization/pages/HomePage";
-import LoginPage from "./Components/Authorization/pages/LoginPage";
-import RegisterPage from "./Components/Authorization/pages/RegisterPage";
-import PlanSelectionPage from "./Components/Authorization/pages/PlanSelectionPage";
+import PlanSelectionInfo from "./Components/Authorization/SingUp/PlanSelectionInfo";
+import PlanSelection from "./Components/Authorization/SingUp/PlanSelection";
+import LogIn from "./Components/Authorization/LogIn/LogIn";
+import SingUp from "./Components/Authorization/SingUp/SingUp";
 
 let FilmsInfo = {
   0: {
@@ -367,9 +365,12 @@ let FilmsInfo = {
 //   FilmsInfo = data.data.results;
 // };
 // FI();
+
 function App(props) {
   let [lang, changeLang] = useState(text.ENG);
-
+  let [selectedFilm, setSelectedFilm] = useState(0);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className="App">
       <BrowserRouter>
@@ -394,6 +395,8 @@ function App(props) {
                 lang={lang}
                 changeLang={changeLang}
                 text={text}
+                selectedFilm={selectedFilm}
+                setSelectedFilm={setSelectedFilm}
               />
             }
           />
@@ -405,13 +408,63 @@ function App(props) {
                 lang={lang}
                 changeLang={changeLang}
                 text={text}
+                selectedFilm={selectedFilm}
+                setSelectedFilm={setSelectedFilm}
               />
             }
           />
-          <Route path="/HP" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage lang={lang} changeLang={changeLang} text={text}/>} />
-          <Route path="/login" element={<LoginPage lang={lang} changeLang={changeLang} text={text}/>}/>
-          <Route path="./SelectPlan" element={<PlanSelectionPage />} />
+          <Route
+            path="/LogIn"
+            element={
+              <LogIn
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+                setEmail={setEmail}
+                email={email}
+                setPassword={setPassword}
+                password={password}
+              />
+            }
+          />
+          <Route
+            path="/SingUp"
+            element={
+              <SingUp
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+                setEmail={setEmail}
+                email={email}
+                setPassword={setPassword}
+                password={password}
+              />
+            }
+          />
+          <Route
+            path="/PlanSelectionInfo"
+            element={
+              <PlanSelectionInfo
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+              />
+            }
+          />
+          <Route
+            path="/PlanSelection"
+            element={
+              <PlanSelection
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+                setEmail={setEmail}
+                email={email}
+                setPassword={setPassword}
+                password={password}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
