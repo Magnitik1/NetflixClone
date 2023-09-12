@@ -9,6 +9,8 @@ import PlanSelectionInfo from "./Components/Authorization/SingUp/PlanSelectionIn
 import PlanSelection from "./Components/Authorization/SingUp/PlanSelection";
 import LogIn from "./Components/Authorization/LogIn/LogIn";
 import SingUp from "./Components/Authorization/SingUp/SingUp";
+import SelectProfile from "./Components/Authorization/Profiles/SelectProfile";
+import EditProfile from "./Components/Authorization/Profiles/EditProfile";
 
 let FilmsInfo = {
   0: {
@@ -370,6 +372,8 @@ function App(props) {
   let [lang, changeLang] = useState(text.ENG);
   let [selectedFilm, setSelectedFilm] = useState(0);
   const [email, setEmail] = useState("");
+  let [currentAccount, setCurrentAccount] = useState("");
+  let [currentProfile, setCurrentProfile] = useState("");
   const [password, setPassword] = useState("");
   return (
     <div className="App">
@@ -397,6 +401,7 @@ function App(props) {
                 text={text}
                 selectedFilm={selectedFilm}
                 setSelectedFilm={setSelectedFilm}
+                currentAccount={currentAccount}
               />
             }
           />
@@ -424,6 +429,7 @@ function App(props) {
                 email={email}
                 setPassword={setPassword}
                 password={password}
+                setCurrentAccount={setCurrentAccount}
               />
             }
           />
@@ -438,6 +444,7 @@ function App(props) {
                 email={email}
                 setPassword={setPassword}
                 password={password}
+                setCurrentAccount={setCurrentAccount}
               />
             }
           />
@@ -462,6 +469,33 @@ function App(props) {
                 email={email}
                 setPassword={setPassword}
                 password={password}
+                setCurrentAccount={setCurrentAccount}
+                currentAccount={currentAccount}
+              />
+            }
+          />
+          <Route
+            path="/SelectProfile"
+            element={
+              <SelectProfile
+                email={email}
+                text={text}
+                lang={lang}
+                setCurrentProfile={setCurrentProfile}
+                currentAccount={currentAccount}
+              />
+            }
+          />
+          <Route
+            path="/EditProfile"
+            element={
+              <EditProfile
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+                email={email}
+                currentProfile={currentProfile}
+                currentAccount={currentAccount}
               />
             }
           />

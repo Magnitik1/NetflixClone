@@ -10,16 +10,16 @@ const Form = (props) => {
   let hendleSingIn = async () => {
     const response = await fetch("http://localhost:3000/api");
     const data = await response.json();
-    email1 = document.getElementById("em").value;
-    pass1 = document.getElementById("pa").value;
+    email1 = document.getElementById("emeil-id").value;
+    pass1 = document.getElementById("password-id").value;
     let prap = true;
     if (props.title === "Log In") {
       data.map((e) => {
         if (e.email == email1 && e.password == pass1) {
-          console.log(e);
-          alert("success");
           prap = false;
-          navigate("/Home");
+          props.setCurrentAccount(e);
+          // navigate("/Home");
+          navigate("/SelectProfile");
         }
       });
       if (prap) {
@@ -30,11 +30,13 @@ const Form = (props) => {
       data.map((e) => {
         if (e.email == email1) {
           alert("not success");
-          prap=false
+          prap = false;
           return;
         }
       });
-      if(!prap){return}
+      if (!prap) {
+        return;
+      }
       navigate("/PlanSelectionInfo");
     }
   };
@@ -44,23 +46,23 @@ const Form = (props) => {
     props.setPassword("");
   }, []);
 
+  let stat = props.title === "Log In";
+
   return (
     <div className="form-container">
-      <Link to={props.title === "Log In" ? "/SingUp" : "/LogIn"}>
-        <a className="SingUp-or-LogIn">
-          {props.title === "Log In" ? "Sing Up" : "Log In"}
-        </a>
+      <Link to={stat ? "/SingUp" : "/LogIn"}>
+        <a className="SingUp-or-LogIn">{stat ? "Sing Up" : "Log In"}</a>
       </Link>
       <div className="input-container">
         <input
-          id="em"
+          id="emeil-id"
           className="email"
           type="email"
           onChange={(e) => ((email1 = e.target.value), props.setEmail(email1))}
           placeholder="Email"
         />
         <input
-          id="pa"
+          id="password-id"
           className="password"
           type="password"
           onChange={(e) => ((pass1 = e.target.value), props.setPassword(pass1))}

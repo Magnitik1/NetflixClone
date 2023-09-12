@@ -58,9 +58,19 @@ const PlanSelection = (props) => {
         onChange={() => {
           setSelectedValue("c");
         }}
-        value="b"
+        value="c"
         name="radio-buttons"
         inputProps={{ "aria-label": "C" }}
+      />
+      4
+      <Radio
+        checked={selectedValue === "d"}
+        onChange={() => {
+          setSelectedValue("d");
+        }}
+        value="d"
+        name="radio-buttons"
+        inputProps={{ "aria-label": "D" }}
       />
       <Link to={selectedValue==''?"":"/LogIn"}>
         <button
@@ -69,26 +79,26 @@ const PlanSelection = (props) => {
               props.email == "" ||
               props.password == "" ||
               selectedValue == ""
-            )
-              return;
+            ) return;
             props.setEmail("");
             props.setPassword("");
-            await fetch("http://localhost:3000/process_post", {
+            let data11 = await fetch("http://localhost:3000/process_post", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                name: props.email,
                 email: props.email,
                 password: props.password,
                 plan: selectedValue,
-                myList: [],
+                users: [],
               }),
             });
+            props.setCurrentAccount(data11.json());
           }}
+          
           className="sign-in-button1">
-          Finish
+          Next
         </button>
       </Link>
     </div>

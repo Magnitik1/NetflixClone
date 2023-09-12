@@ -1,0 +1,15 @@
+.select-profiles{
+    background-color: var(--background);
+    width: 100vw;
+    position: absolute;
+    left:8px;
+    height: 100vh;
+}
+
+.select-profiles-text{
+    color: var(--main-text);
+}
+
+.profiles-conteiner{
+    display: flex;
+}

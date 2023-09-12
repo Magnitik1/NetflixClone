@@ -17,7 +17,7 @@ function WatchFilm(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: 2, name: "Mike" }),
+      body: JSON.stringify({ email: "tyler@gmail.com" }),
     });
   };
 

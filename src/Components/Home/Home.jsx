@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Top from "./Top.jsx";
 import Button from "@mui/material/Button";
 import right from "./pictures/right1.svg";
@@ -59,6 +59,8 @@ function Home(props) {
     </>
   );
   let row = 0;
+
+
   return (
     <div className="wrapper">
       <Top />

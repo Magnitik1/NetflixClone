@@ -16,6 +16,7 @@ const LogIn = (props) => {
           email={props.email}
           setPassword={props.setPassword}
           password={props.password}
+          setCurrentAccount={props.setCurrentAccount}
         />
       </div>
       <Footer
