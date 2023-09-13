@@ -1,43 +1,63 @@
+.centered-container{
+  background-color: var(--main-text);
+}
 .plan-selection-container {
-    text-align: center;
-    background-color: var(--main-text);
-    height: 100vh;
-    margin-left:1px;
-    width: 100vw;
-  }
-  
-  .plan-selection-header {
-    margin-bottom: 20px;
-  }
-  
-  .step-text {
-    font-size: 14px;
-    margin-top: 0;
-  }
-  
-  .plan-title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .plan-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .plan-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    background-color: var(--main-text);
-  }
-  
-  .checkmark {
-    font-size: 20px;
-    margin-right: 10px;
-  }
-  
-  .plan-description {
-    font-size: 16px;
-  }
-  
+  text-align: center;
+  background-color: var(--main-text);
+}
+.header-title {
+  font-size: 50px;
+color: orange;
+position: absolute;
+top: 0;
+left: 0;
+margin: 10px;
+z-index: 1;
+}
+.plan-selection-header {
+  margin-bottom: 20px;
+  text-align: center;
+  margin-top: 50px; 
+  background-color: var(--main-text);
+}
+
+.step-text {
+  font-size: 14px;
+}
+
+.plan-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.plan-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.plan-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: var(--main-text);
+}
+
+.checkmark {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.plan-description {
+  font-size: 16px;
+}
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+.plan-selection-container {
+  text-align: center;
+}
+
