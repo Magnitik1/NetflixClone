@@ -62,8 +62,8 @@ function Home(props) {
 
 
   return (
-    <div className="wrapper">
-      <Top />
+    <div className="wrapper" onClick={()=>{}}>
+      <Top currentProfile={props.currentProfile}/>
       <TopFilm
         FilmsInfo={props.FilmsInfo}
         selectedFilm={props.selectedFilm}

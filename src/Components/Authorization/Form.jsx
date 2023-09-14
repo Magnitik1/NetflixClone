@@ -18,8 +18,10 @@ const Form = (props) => {
         if (e.email == email1 && e.password == pass1) {
           prap = false;
           props.setCurrentAccount(e);
+          localStorage.setItem("currentAccount", e.email)
           // navigate("/Home");
           navigate("/SelectProfile");
+          return;
         }
       });
       if (prap) {

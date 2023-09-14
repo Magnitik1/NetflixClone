@@ -1,0 +1,40 @@
+.small-img {
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.small-img:hover {
+  opacity: 0.9;
+}
+
+.settings-list {
+  position: absolute;
+  width: 0px;
+  right: 10px;
+  top: 55px;
+  background-color: black;
+  color: white;
+  z-index: 5;
+}
+
+.settings-list-conteiner {
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  right: 25px;
+  position: absolute;
+  top: 5px;
+}
+
+.justUl li {
+  cursor: pointer;
+  padding: 4px;
+  margin: 2px;
+  text-decoration: none;
+  color: white;
+  font-family: Aktiv Grotesk Corp;
+}
+
+.justUl li:hover{
+    opacity: 0.8;
+}

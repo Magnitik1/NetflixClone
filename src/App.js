@@ -11,6 +11,7 @@ import LogIn from "./Components/Authorization/LogIn/LogIn";
 import SingUp from "./Components/Authorization/SingUp/SingUp";
 import SelectProfile from "./Components/Authorization/Profiles/SelectProfile";
 import EditProfile from "./Components/Authorization/Profiles/EditProfile";
+import Account from "./Components/Authorization/Accout/Account";
 
 let FilmsInfo = {
   0: {
@@ -369,12 +370,29 @@ let FilmsInfo = {
 // FI();
 
 function App(props) {
+  let tempAccount = localStorage.getItem("currentAccount")?getData():"";
+  let tempProfile = localStorage.getItem("currentProfile")?localStorage.getItem('currentProfile'):"";
+
   let [lang, changeLang] = useState(text.ENG);
   let [selectedFilm, setSelectedFilm] = useState(0);
   const [email, setEmail] = useState("");
-  let [currentAccount, setCurrentAccount] = useState("");
-  let [currentProfile, setCurrentProfile] = useState("");
+  let [currentAccount, setCurrentAccount] = useState(tempAccount);
+  let [currentProfile, setCurrentProfile] = useState(tempProfile);
   const [password, setPassword] = useState("");
+
+  async function getData() {
+    const response = await fetch("http://localhost:3000/api_account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem("currentAccount"),
+      }),
+    });
+    let tempdata = await response.json();
+    return tempdata;
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -400,8 +418,7 @@ function App(props) {
                 changeLang={changeLang}
                 text={text}
                 selectedFilm={selectedFilm}
-                setSelectedFilm={setSelectedFilm}
-                currentAccount={currentAccount}
+                setSelectedFilm={setSelectedFilm}                
               />
             }
           />
@@ -490,6 +507,19 @@ function App(props) {
             path="/EditProfile"
             element={
               <EditProfile
+                lang={lang}
+                changeLang={changeLang}
+                text={text}
+                email={email}
+                currentProfile={currentProfile}
+                currentAccount={currentAccount}
+              />
+            }
+          />
+          <Route
+            path="/Account"
+            element={
+              <Account
                 lang={lang}
                 changeLang={changeLang}
                 text={text}

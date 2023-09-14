@@ -29,6 +29,7 @@ function WatchFilm(props) {
         api_key,
       },
     });
+    console.log(data.data)
     let f = data.data.results[0].key;
     setVideoID(f);
     // FilmsInfo = data.data.results;
