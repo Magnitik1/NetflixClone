@@ -78,7 +78,7 @@ export default function ButtonAppBar(props) {
             </IconButton>
           </Link>
           <Button style={{ textTransform: "none", color: "inherit" }}>
-            Головна
+            Головн
           </Button>
           <Button style={{ textTransform: "none", color: "inherit" }}>
             Серіали
