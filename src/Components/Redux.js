@@ -53,6 +53,22 @@ export const text = {
     "Terms of Use", //41
     "Contact Us", //42
     "some text", //43
+    "Edit Profile", //44
+    "Language",//45
+    "Save", //46
+    "Cencel", //47
+    "Delete Profile", //48
+    "Game Handle", //49
+    "Maturity Settings", //50
+    "Your handle is a unique name that'll be used for playing with other Netflix members across all Netflix Games. Learn more", //51
+    "Your name", //52
+    "Show titles of all maturity ratings for this profile.", //53
+    "All Maturity Ratings", //54
+    "Autoplay controls", //55
+    "Autoplay next episode in a series on all devices.", //56
+    "Autoplay previews while browsing on all devices.", //57
+    "", //58
+    "", //59
   ],
   UA: [
     "Українська", //0
@@ -108,6 +124,22 @@ export const text = {
     "Умови використання", //41
     "Зв'язатись з нами", //42
     "якийсь текст", //43
+    "Редагувати Профіль", //44
+    "Мова", //45
+    "Зберегти", //46
+    "Скасувати", //47
+    "Видалити Профіль", //48
+    "Ігрове Ім'я", //49
+    "Вікові Налаштування", //50
+    "Ваше ігрове ім'я — це унікальне ім’я, яке використовуватиметься у всіх іграх Netflix. Дізнатись більше", //51
+    "Ваше ім'я", //52
+    "Показувати фільми всіх вікових категорій для цього профілю.", //53
+    "Усі вікові категорії", //54
+    "Автовідтворення", //55
+    "Автоматичне відтворення наступної серії на всіх пристроях.", //56
+    "Автоматичний попередній перегляд на всіх пристроях.", //57
+    "", //58
+    "", //59
   ],
 };
 

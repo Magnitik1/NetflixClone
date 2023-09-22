@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Search from "./pictures/search.svg";
+import Search from "./pictures/search 1.svg";
 import Bell from "./pictures/bell.svg";
 import { Link, useNavigate } from "react-router-dom";
 import "./top.css";
@@ -59,7 +59,7 @@ export default function ButtonAppBar(props) {
     container();
   }, []);
   return (
-    <Box sx={{ width: "100vw", minWidth: "900px" }}>
+    <Box style={{position:"fixed", width: "100vw", minWidth: "900px", zIndex:"5", }}>
       <AppBar
         position="static"
         style={{
@@ -109,6 +109,9 @@ export default function ButtonAppBar(props) {
               document.getElementById("settings").style.width = visibility
                 ? "0"
                 : "200px";
+              document.getElementById("settings").style.opacity = visibility
+                ? "0"
+                : "1";
               setVisibility(!visibility);
             }}
           />
@@ -157,6 +160,7 @@ export default function ButtonAppBar(props) {
                 }}>
                 Help Center
               </li>
+              <hr style={{width:"calc(100% + 40px)", marginLeft:"-40px"}}/>
               <Link
                 to="/"
                 onClick={() => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Top from "./Top.jsx";
 import Button from "@mui/material/Button";
 import right from "./pictures/right1.svg";
@@ -6,64 +6,65 @@ import TopFilm from "./TopFilm.jsx";
 import "./Home.css";
 import Footer from "../Footer/Footer.jsx";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
+let sect = 0;
 function Home(props) {
-  let count = 0;
-  let data = [{}, {}, {}, {}, {}, {}];
+  let [allFilms, setAllFilms] = useState(null);
+  useEffect(() => {
+    async function getFilms() {
+      const response = await fetch("http://localhost:2999/get");
+      let tempdata = await response.json();
+      // console.log(tempdata);
+      setAllFilms(tempdata);
+      // return tempdata;
+    }
+    if (!allFilms) getFilms();
+  }, []);
 
   // console.log(props.FilmsInfo);
   let sections = [
     ["Нові Релізи", "New Releases", "newReleases"],
-    [
-      "Серіали про надприродні явища",
-      "TV shows about supernatural phenomena",
-      "TVShowsAboutSupernaturalPhenomena",
-    ],
-    ["В тренді", "Popular", "Popular"],
+    ["Популярне на FlixUa", "Popular On FlixUa", "popularOnFlixUa"],
+    ["Аніме", "Anime", "anime"],
+    ["Боллівудські Фільми", "Bollywood Movies", "bollywoodMovies"],
+    ["ТВ комедії", "TV Comedies", "TVComedies"],
+    ["Блокбастер", "Blockbuster", "blockbuster"],
+    ["В тренді", "In Trend", "inTrend"],
     ["Серіали для сімейного перегляду", "Family TV shows", "familyTVShows"],
   ];
-  let films = (row) => (
-    <>
-      <Button
-        className="btnbg"
-        style={{
-          right: "0",
-          background: "white",
-          borderTopLeftRadius: "60px",
-          borderBottomLeftRadius: "60px",
-          height: "420px",
-          marginTop: "11px",
-          width: "40px",
-          position: "absolute",
-        }}>
-        <img src={right} style={{ height: "50%", width: "100%" }} />
-      </Button>
-      {data.map((e) => {
-        if (count < 5 * (row + 1)) {
-          count++;
-          return (
-            <Link id={count-1} onClick={(e)=>{props.setSelectedFilm(e.currentTarget.id)}} to="/WatchFilm">
-              <div className="filmsContainer">
-                <img
-                  src={
-                    "https://image.tmdb.org/t/p/w500/" +
-                    props.FilmsInfo[count - 1].poster_path
-                  }
-                  className="films"
-                />
-              </div>
-            </Link>
-          );
-        }
-      })}
-    </>
-  );
-  let row = 0;
+  const settings = {
+    infinite: true,
+    speed: 404,
+    slidesToShow: 5,
+    slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 10000,
+  };
+  let WatchTheFilm = (s) => {
+    if (!allFilms) return;
+    console.log(s)
+    console.log(allFilms[s]);
+  };
+  
+  let NextFilm = (s) => {
+    
+    if(!allFilms||!allFilms[s]){ sect=0;return};
+    console.log(s);
+    if (s > 60) {
+      sect = 0;
+      s = 0;
+    }
 
-
+    return allFilms ? allFilms[s].img : "";
+  };
+  let r = [];
+  for (let i = 0; i < 12; i++) r.push(i);
   return (
-    <div className="wrapper" onClick={()=>{}}>
-      <Top currentProfile={props.currentProfile}/>
+    <div className="wrapper">
+      <Top currentProfile={props.currentProfile} />
       <TopFilm
         FilmsInfo={props.FilmsInfo}
         selectedFilm={props.selectedFilm}
@@ -76,12 +77,32 @@ function Home(props) {
         } else {
           j = 1;
         }
-
         return (
-          <>
-            <a className="sectionName">{e[j]}</a>
-            <div className="sections">{films(row++)}</div>
-          </>
+          <div className="container-for-section">
+            <a
+              style={{ color: "white", fontSize: "22px", marginLeft: "3.2vw" }}>
+              {e[j]}
+            </a>
+            <div className="container-for-carousel">
+              <Slider {...settings}>
+                {r.map((s) => {
+                  return (
+                    <div>
+                      <img
+                        id={sect}
+                        onClick={(e) => {
+                          WatchTheFilm(e.target.id);
+                        }}
+                        style={{ cursor: "pointer" }}
+                        src={NextFilm(sect++)}
+                        className="carousel-pic-container"
+                      />
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
+          </div>
         );
       })}
       <Footer

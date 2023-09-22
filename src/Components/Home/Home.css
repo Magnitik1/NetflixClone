@@ -136,3 +136,21 @@ body {
   height: 100%;
   background: white;
 }
+
+.container-for-carousel {
+  padding: 40px;
+  width: calc(100vw - 95px);
+}
+
+.slick-slide img {
+  margin: auto;
+}
+
+.container-for-section{
+  margin-top: 1%;
+}
+
+.carousel-pic-container{
+  width: 95%;
+  height: 25vw;
+}

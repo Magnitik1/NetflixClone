@@ -30,6 +30,7 @@ const SelectProfile = (props) => {
           }),
         });
         tempdata = await response.json();
+        console.log(tempdata);
         setData(tempdata);
       }
       if (data === null) {

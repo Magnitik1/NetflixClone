@@ -12,6 +12,7 @@ import SingUp from "./Components/Authorization/SingUp/SingUp";
 import SelectProfile from "./Components/Authorization/Profiles/SelectProfile";
 import EditProfile from "./Components/Authorization/Profiles/EditProfile";
 import Account from "./Components/Authorization/Accout/Account";
+import SelectPicture from "./Components/Authorization/Profiles/SelectPicture";
 
 let FilmsInfo = {
   0: {
@@ -393,6 +394,7 @@ function App(props) {
     let tempdata = await response.json();
     return tempdata;
   }
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -522,6 +524,18 @@ function App(props) {
               <Account
                 lang={lang}
                 changeLang={changeLang}
+                text={text}
+                email={email}
+                currentProfile={currentProfile}
+                currentAccount={currentAccount}
+              />
+            }
+          />
+          <Route
+            path="/selectPicture"
+            element={
+              <SelectPicture
+                lang={lang}
                 text={text}
                 email={email}
                 currentProfile={currentProfile}

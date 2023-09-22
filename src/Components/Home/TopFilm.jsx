@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import barbie from "./pictures/barbie.jpg";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -7,7 +6,7 @@ import { Link } from "react-router-dom";
 function TopFilm(props) {
   let [topFilm, setTopFilm] = useState(0);
   return (
-    <div className="mainPicConteiner" style={{ cursor: "pointer" }} onClick={()=>{
+    <div className="mainPicConteiner" style={{ cursor: "pointer", marginTop:"80px" }} onClick={()=>{
       if(topFilm>=19){setTopFilm(0)}
       else setTopFilm(topFilm+1)
       }}>
