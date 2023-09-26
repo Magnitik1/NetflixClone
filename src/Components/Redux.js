@@ -48,7 +48,7 @@ export const text = {
     "Account", //36
     "Ways to Watch", //37
     "Corprate Information", //38
-    "Only on Netflix", //39
+    "Only on FlixUA", //39
     "Media Centre", //40
     "Terms of Use", //41
     "Contact Us", //42
@@ -56,11 +56,11 @@ export const text = {
     "Edit Profile", //44
     "Language",//45
     "Save", //46
-    "Cencel", //47
+    "Cancel", //47
     "Delete Profile", //48
     "Game Handle", //49
     "Maturity Settings", //50
-    "Your handle is a unique name that'll be used for playing with other Netflix members across all Netflix Games. Learn more", //51
+    "Your handle is a unique name that'll be used for playing with other FlixUA members across all FlixUA Games. Learn more", //51
     "Your name", //52
     "Show titles of all maturity ratings for this profile.", //53
     "All Maturity Ratings", //54
@@ -119,7 +119,7 @@ export const text = {
     "Акаунт", //36
     "Способи перегляду", //37
     "Корпоративна інформація", //38
-    "Тільки на Netflix", //39
+    "Тільки на FlixUA", //39
     "Медіа центр", //40
     "Умови використання", //41
     "Зв'язатись з нами", //42
@@ -131,7 +131,7 @@ export const text = {
     "Видалити Профіль", //48
     "Ігрове Ім'я", //49
     "Вікові Налаштування", //50
-    "Ваше ігрове ім'я — це унікальне ім’я, яке використовуватиметься у всіх іграх Netflix. Дізнатись більше", //51
+    "Ваше ігрове ім'я — це унікальне ім’я, яке використовуватиметься у всіх іграх FlixUA. Дізнатись більше", //51
     "Ваше ім'я", //52
     "Показувати фільми всіх вікових категорій для цього профілю.", //53
     "Усі вікові категорії", //54

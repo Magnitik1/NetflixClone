@@ -13,7 +13,23 @@ import SelectProfile from "./Components/Authorization/Profiles/SelectProfile";
 import EditProfile from "./Components/Authorization/Profiles/EditProfile";
 import Account from "./Components/Authorization/Accout/Account";
 import SelectPicture from "./Components/Authorization/Profiles/SelectPicture";
-
+import img0 from "./Components/MainPage/picsAndFonts/profilePic.jpg";
+import img1 from "./Components/MainPage/picsAndFonts/1.png";
+import img2 from "./Components/MainPage/picsAndFonts/2.png";
+import img3 from "./Components/MainPage/picsAndFonts/3.png";
+import img4 from "./Components/MainPage/picsAndFonts/4.png";
+import img5 from "./Components/MainPage/picsAndFonts/5.png";
+import img6 from "./Components/MainPage/picsAndFonts/6.png";
+import img7 from "./Components/MainPage/picsAndFonts/7.png";
+import img8 from "./Components/MainPage/picsAndFonts/8.png";
+import img9 from "./Components/MainPage/picsAndFonts/9.png";
+import img10 from "./Components/MainPage/picsAndFonts/10.png";
+import img11 from "./Components/MainPage/picsAndFonts/11.png";
+import img12 from "./Components/MainPage/picsAndFonts/12.png";
+import img13 from "./Components/MainPage/picsAndFonts/13.png";
+import img14 from "./Components/MainPage/picsAndFonts/14.png";
+import img15 from "./Components/MainPage/picsAndFonts/15.png";
+import img16 from "./Components/MainPage/picsAndFonts/16.png";
 let FilmsInfo = {
   0: {
     adult: false,
@@ -356,7 +372,7 @@ let FilmsInfo = {
     vote_count: 18,
   },
 };
-
+localStorage.setItem("tempData", false);
 // let FI = async () => {
 //   let api_url = "https://api.themoviedb.org/3";
 //   let api_key = "9cb46f70376b42f505fe5cac16fa8f42";
@@ -371,8 +387,30 @@ let FilmsInfo = {
 // FI();
 
 function App(props) {
-  let tempAccount = localStorage.getItem("currentAccount")?getData():"";
-  let tempProfile = localStorage.getItem("currentProfile")?localStorage.getItem('currentProfile'):"";
+  let images = [
+    img0,
+    img1,
+    img2,
+    img3,
+    img4,
+    img5,
+    img6,
+    img7,
+    img8,
+    img9,
+    img10,
+    img11,
+    img12,
+    img13,
+    img14,
+    img15,
+    img16,
+  ];
+  // localStorage.setItem("profileImage", img1);
+  let tempAccount = localStorage.getItem("currentAccount") ? getData() : "";
+  let tempProfile = localStorage.getItem("currentProfile")
+    ? localStorage.getItem("currentProfile")
+    : "";
 
   let [lang, changeLang] = useState(text.ENG);
   let [selectedFilm, setSelectedFilm] = useState(0);
@@ -394,7 +432,7 @@ function App(props) {
     let tempdata = await response.json();
     return tempdata;
   }
-  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -415,12 +453,13 @@ function App(props) {
             path="/Home"
             element={
               <Home
+                images={images}
                 FilmsInfo={FilmsInfo}
                 lang={lang}
                 changeLang={changeLang}
                 text={text}
                 selectedFilm={selectedFilm}
-                setSelectedFilm={setSelectedFilm}                
+                setSelectedFilm={setSelectedFilm}
               />
             }
           />
@@ -497,6 +536,7 @@ function App(props) {
             path="/SelectProfile"
             element={
               <SelectProfile
+                images={images}
                 email={email}
                 text={text}
                 lang={lang}
@@ -509,6 +549,7 @@ function App(props) {
             path="/EditProfile"
             element={
               <EditProfile
+                images={images}
                 lang={lang}
                 changeLang={changeLang}
                 text={text}
@@ -522,6 +563,7 @@ function App(props) {
             path="/Account"
             element={
               <Account
+                images={images}
                 lang={lang}
                 changeLang={changeLang}
                 text={text}
@@ -535,6 +577,7 @@ function App(props) {
             path="/selectPicture"
             element={
               <SelectPicture
+                images={images}
                 lang={lang}
                 text={text}
                 email={email}

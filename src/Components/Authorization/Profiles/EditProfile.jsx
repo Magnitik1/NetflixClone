@@ -3,7 +3,12 @@ import s from "./editProfile.module.css";
 import pic from "../../MainPage/picsAndFonts/profilePic.jpg";
 import down from "../../MainPage/picsAndFonts/down.png";
 import { useNavigate } from "react-router-dom";
+// import temppic from `../../MainPage/picsAndFonts/${localStorage.getItem('profileImage')}.png`;
+
 const EditProfile = (props) => {
+  let [image, setImage] = useState(
+    "https://media.istockphoto.com/id/1393750072/vector/flat-white-icon-man-for-web-design-silhouette-flat-illustration-vector-illustration-stock.jpg?s=612x612&w=0&k=20&c=s9hO4SpyvrDIfELozPpiB_WtzQV9KhoMUP9R9gVohoU="
+  );
   let [prof, setProf] = useState("");
   let [autoPlay, setAutoPlay] = useState([true, true]);
   let nav = useNavigate();
@@ -29,24 +34,57 @@ const EditProfile = (props) => {
       }),
     });
     let tempdata = await response.json();
-    setAutoPlay(tempdata.autoPlaySettings);
-    ChangeLanguage(tempdata.language===props.text.UA[0]?props.text.UA[0]:props.text.ENG[0])
+
+    if (localStorage.getItem("tempData") != "false") {
+      setAutoPlay([
+        JSON.parse(localStorage.getItem("tempData")).autoPlay0,
+        JSON.parse(localStorage.getItem("tempData")).autoPlay1,
+      ]);
+    } else {
+      setAutoPlay(tempdata.autoPlaySettings);
+    }
+    ChangeLanguage(
+      localStorage.getItem("tempData") != "false"
+        ? JSON.parse(localStorage.getItem("tempData")).language
+        : tempdata.language === props.text.UA[0]
+        ? props.text.UA[0]
+        : props.text.ENG[0]
+    );
     setProf(tempdata);
-    console.log(tempdata);
   }
   useEffect(() => {
     getData();
+    if (localStorage.getItem("currentProfile") == 0) return;
     document.getElementById("name").value =
-      localStorage.getItem("currentProfile");
+      localStorage.getItem("tempData") != "false"
+        ? JSON.parse(localStorage.getItem("tempData")).name
+        : localStorage.getItem("currentProfile");
   }, []);
 
   let img1 = prof ? prof.imgSrc : pic;
+  localStorage.setItem("profileImage", img1);
   return (
     <div className={s.edit_profile}>
       <a className={s.text}>{props.lang[44]}</a>
       <hr className={s.line} />
       <div className={s.img}>
-        <img src={img1} className={s.profile_pic} onClick={()=>nav("/selectPicture")} />
+        <img
+          src={localStorage.getItem("tempPic")?props.images[localStorage.getItem("tempPic")]:props.images[localStorage.getItem("profileImage")]}
+          className={s.profile_pic}
+          onClick={() => {
+            localStorage.setItem(
+              "tempData",
+              JSON.stringify({
+                name: tempName,
+                language: props.lang[0],
+                img: localStorage.getItem("profileImage"),
+                autoPlay0: autoPlay[0],
+                autoPlay1: autoPlay[1],
+              })
+            );
+            nav("/selectPicture");
+          }}
+        />
       </div>
       <div className={s.profile_info}>
         <form>
@@ -92,7 +130,12 @@ const EditProfile = (props) => {
           style={{ marginTop: "-20px" }}
           type="text"
           id="gamename"
-          value={localStorage.getItem("currentProfile") + "#546408"}
+          placeholder={props.lang[49]}
+          value={
+            localStorage.getItem("currentProfile")
+              ? null
+              : localStorage.getItem("currentProfile") + "#546408"
+          }
           className={s.name}
         />
         <br />
@@ -133,23 +176,42 @@ const EditProfile = (props) => {
         <br />
         <br />
         <input
-          onClick={async () => {//save
+          onClick={async () => {
+            //save
             if (tempName.trim() === "") {
               return;
             }
-            fetch("http://localhost:3000/process_edit_profile", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: localStorage.getItem("currentAccount"),
-                newName: tempName,
-                oldName: localStorage.getItem("currentProfile"),
-                language: props.lang[0],
-                autoPlaySettings: autoPlay,
-              }),
-            });
+            if (localStorage.getItem("currentProfile") == "") {
+              fetch("http://localhost:3000/process_post_profile", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: localStorage.getItem("currentAccount"),
+                  profile: {
+                    name: tempName,
+                    language: props.lang[0],
+                    autoPlaySettings: autoPlay,
+                    imgSrc: localStorage.getItem("profileImage"),
+                  },
+                }),
+              });
+            } else
+              fetch("http://localhost:3000/process_edit_profile", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: localStorage.getItem("currentAccount"),
+                  newName: tempName,
+                  oldName: localStorage.getItem("currentProfile"),
+                  language: props.lang[0],
+                  autoPlaySettings: autoPlay,
+                  imgSrc: localStorage.getItem("tempPic"),
+                }),
+              });
             localStorage.setItem("currentProfile", "");
             nav("/selectProfile");
           }}
@@ -158,15 +220,17 @@ const EditProfile = (props) => {
           className={s.save + " " + s.btn}
         />
         <input
-          onClick={() => {//cencel
+          onClick={() => {
+            //cancel
             nav("/selectProfile");
           }}
           type="submit"
           value={props.lang[47]}
-          className={s.btn + " " + s.cencel}
+          className={s.btn + " " + s.cancel}
         />
         <input
-          onClick={async () => {//delete
+          onClick={async () => {
+            //delete
             fetch("http://localhost:3000/process_remove_profile", {
               method: "POST",
               headers: {

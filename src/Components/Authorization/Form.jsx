@@ -52,6 +52,7 @@ const Form = (props) => {
 
   return (
     <div className="form-container">
+      <Link to="/"><a className="logo" style={{left:"25px", top:"-5px"}}>FLIXUA</a></Link>
       <Link to={stat ? "/SingUp" : "/LogIn"}>
         <a className="SingUp-or-LogIn">{stat ? "Sing Up" : "Log In"}</a>
       </Link>

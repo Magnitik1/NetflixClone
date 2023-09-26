@@ -18,6 +18,8 @@ const SelectProfile = (props) => {
     localStorage.setItem("currentProfile", "");
   };
   useEffect(() => {
+    localStorage.removeItem("tempPic")
+    localStorage.setItem("tempData", false)
     async function container() {
       async function getData() {
         const response = await fetch("http://localhost:3000/api_account", {
@@ -42,6 +44,7 @@ const SelectProfile = (props) => {
             onClick={() => {
               props.setCurrentProfile(e.name);
               localStorage.setItem("currentProfile", e.name);
+              localStorage.setItem("profileImage", e.imgSrc);
             }}
             sx={{
               width: "190px",
@@ -76,7 +79,7 @@ const SelectProfile = (props) => {
                 component="img"
                 height="190px"
                 style={{ borderRadius: "5px" }}
-                image={e.imgSrc}
+                image={props.images[e.imgSrc]}
                 alt="img"
               />
               <CardContent>
@@ -104,13 +107,14 @@ const SelectProfile = (props) => {
           to={manageProfile === "Done" ? "/EditProfile" : "/Home"}>
           {profiles}
         </Link>
-        {manageProfile === "Done" ? (
+        {manageProfile === "Done" && data.users.length>4 ? (
           ""
         ) : (
           <Link
             to="/EditProfile"
             onClick={() => {
-              localStorage.setItem("currentProfile", "");
+              localStorage.setItem("profileImage", 0)
+              localStorage.setItem("currentProfile", null);
               props.setCurrentProfile(null);
             }}
             style={{ cursor: "pointer" }}>

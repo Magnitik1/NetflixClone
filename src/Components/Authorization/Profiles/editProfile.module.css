@@ -83,7 +83,7 @@
   padding-right: 30px;
   cursor: pointer;
 }
-.cencel {
+.cancel {
   border: 2px solid rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
@@ -96,7 +96,7 @@
   color: rgba(255, 255, 255, 1);
   background-color: rgba(255, 0, 0, 0.4);
 }
-.cencel:hover {
+.cancel:hover {
   border: 2px solid rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, 1);
 }
@@ -136,9 +136,26 @@
   line-height: 168.523%;
 }
 
-
-
-
-.selectPicture{
-    color: white;
+.selectPicture {
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+.selectPicture img {
+  cursor: pointer;
+  margin: 5px;
+  width: 185px;
+}
+.selectPicture div {
+  font-family: Aktiv Grotesk Corp;
+  font-size: 30px;
+}
+.prof_img {
+  border-radius: 12px;
+  right: 3vw;
+  top: 4vh;
+  width: 130px;
+  height: 130px;
+  position: fixed;
 }
