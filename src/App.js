@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import MainPage from "./Components/MainPage/MainPage";
-import WatchFilm from "./Components/Home/WatchFilm/WatchFilm";
 import React, { useState } from "react";
 import { text } from "./Components/Redux";
 import PlanSelectionInfo from "./Components/Authorization/SingUp/PlanSelectionInfo";
@@ -13,7 +12,8 @@ import SelectProfile from "./Components/Authorization/Profiles/SelectProfile";
 import EditProfile from "./Components/Authorization/Profiles/EditProfile";
 import Account from "./Components/Authorization/Accout/Account";
 import SelectPicture from "./Components/Authorization/Profiles/SelectPicture";
-import img0 from "./Components/MainPage/picsAndFonts/profilePic.jpg";
+import img0 from "./Components/MainPage/picsAndFonts/profilePic.png";
+import Player from "./Components/Home/Player/Player";
 import img1 from "./Components/MainPage/picsAndFonts/1.png";
 import img2 from "./Components/MainPage/picsAndFonts/2.png";
 import img3 from "./Components/MainPage/picsAndFonts/3.png";
@@ -373,18 +373,6 @@ let FilmsInfo = {
   },
 };
 localStorage.setItem("tempData", false);
-// let FI = async () => {
-//   let api_url = "https://api.themoviedb.org/3";
-//   let api_key = "9cb46f70376b42f505fe5cac16fa8f42";
-//   const data = await axios.get(`${api_url}/discover/movie`, {
-//     params: {
-//       api_key,
-//     },
-//   });
-//   console.log(data);
-//   FilmsInfo = data.data.results;
-// };
-// FI();
 
 function App(props) {
   let images = [
@@ -406,12 +394,12 @@ function App(props) {
     img15,
     img16,
   ];
-  // localStorage.setItem("profileImage", img1);
   let tempAccount = localStorage.getItem("currentAccount") ? getData() : "";
   let tempProfile = localStorage.getItem("currentProfile")
     ? localStorage.getItem("currentProfile")
     : "";
 
+  let [currentVideo, setCurrentVideo] = useState("");
   let [lang, changeLang] = useState(text.ENG);
   let [selectedFilm, setSelectedFilm] = useState(0);
   const [email, setEmail] = useState("");
@@ -453,20 +441,8 @@ function App(props) {
             path="/Home"
             element={
               <Home
+                setCurrentVideo={setCurrentVideo}
                 images={images}
-                FilmsInfo={FilmsInfo}
-                lang={lang}
-                changeLang={changeLang}
-                text={text}
-                selectedFilm={selectedFilm}
-                setSelectedFilm={setSelectedFilm}
-              />
-            }
-          />
-          <Route
-            path="/WatchFilm"
-            element={
-              <WatchFilm
                 FilmsInfo={FilmsInfo}
                 lang={lang}
                 changeLang={changeLang}
@@ -583,6 +559,15 @@ function App(props) {
                 email={email}
                 currentProfile={currentProfile}
                 currentAccount={currentAccount}
+              />
+            }
+          />
+          <Route
+            path="/Player"
+            element={
+              <Player
+                currentVideo={currentVideo}
+                setCurrentVideo={setCurrentVideo}
               />
             }
           />

@@ -8,7 +8,6 @@ const SelectPicture = (props) => {
   let [pic, setPic] = useState(localStorage.getItem("profileImage"));
   let nav = useNavigate();
   let change = () => {
-    console.log(pic);
     localStorage.setItem("tempPic", pic);
   };
 
@@ -17,7 +16,7 @@ const SelectPicture = (props) => {
     setPic(num);
   };
   return (
-    <>
+    <div>
       <img
         src={props.images[localStorage.getItem("profileImage")]}
         className={s.prof_img}
@@ -25,10 +24,11 @@ const SelectPicture = (props) => {
       <div className={s.selectPicture}>
         <Link to="/editProfile">
           <a
-            className="logo"
+            className="logo backBtn"
             onClick={change}
-            style={{ left: "25px", top: "-5px" }}>
-            Back
+            style={{ position: "fixed", padding: "35px",left: "-5px", borderRadius: '50px'}}>
+            <span style={{ color: "white", fontSize: "75px" }}>←</span> Edit
+            Profile
           </a>
         </Link>
         <br />
@@ -97,7 +97,7 @@ const SelectPicture = (props) => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

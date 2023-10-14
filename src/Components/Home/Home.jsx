@@ -6,31 +6,53 @@ import Footer from "../Footer/Footer.jsx";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import plus from "../MainPage/picsAndFonts/plus.png";
+import { useNavigate } from "react-router-dom";
+import WatchFilm from "./WatchFilm.jsx";
 
 let sect = 0;
 let setSect = () => {
   sect = 0;
 };
+
 function Home(props) {
   let [allFilms, setAllFilms] = useState(null);
+  let [myList, setMyList] = useState();
+  let [liked, setLiked] = useState(false);
+
   let [page, setPage] = useState("Home");
   useEffect(() => {
+    try {
+      setLiked(
+        myList
+          ? myList.find((e) => {
+              if (e.name == film[0].name) return e;
+            })
+          : false
+      );
+    } catch {}
+    async function getProfile() {
+      const response = await fetch("http://localhost:3000/api_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: localStorage.getItem("currentAccount"),
+          name: localStorage.getItem("currentProfile"),
+        }),
+      });
+      let tempdata = await response.json();
+      setMyList(tempdata.myList);
+    }
     async function getFilms() {
       const response = await fetch("http://localhost:2999/get");
       let tempdata = await response.json();
-      // console.log(tempdata);
       setAllFilms(tempdata);
-      // return tempdata;
     }
     if (!allFilms) getFilms();
+    getProfile();
   }, []);
 
-  // console.log(props.FilmsInfo);
   let sections = [
     ["Нові Релізи", "New Releases", "newReleases"],
     ["Популярне на FlixUa", "Popular On FlixUa", "popularOnFlixUa"],
@@ -49,26 +71,27 @@ function Home(props) {
     autoplay: true,
     autoplaySpeed: 10000,
   };
-  const style = {
-    position: "absolute",
-    top: "624px",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "65%",
-    minWidth: "600px",
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    color: "white",
-    background: "black",
-    p: 4,
-    display: "block",
-  };
 
   const [open, setOpen] = React.useState(false);
   const [film, setFilm] = React.useState(null);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (q) => {
+    try {
+      setLiked(
+        myList
+          ? myList.find((e) => {
+              if (e.name == q) return e;
+            })
+          : false
+      );
+    } catch {}
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
+  let nav = useNavigate();
+  let openVideo = async () => {
+    await props.setCurrentVideo(film[0].nameEng);
+    nav("/Player");
+  };
 
   let WatchTheFilm = (s) => {
     if (!allFilms) return;
@@ -83,125 +106,52 @@ function Home(props) {
     if (s > 68) {
       sect = 0;
     }
-    if (page == "Home") {
-      console.log("My Home");
-    }
     if (allFilms[s].isFilm && page == "Serials") {
-      console.log("Serial");
       return NextFilm(sect++);
     }
     if (!allFilms[s].isFilm && page == "Films") {
-      console.log("Film");
       return NextFilm(sect++);
     }
     return allFilms ? allFilms[s].img : "";
   };
 
   let r = [];
-  let cc = 12;
-  if (page == "Serials") cc = 6;
-  else if (page == "Films") cc = 8;
-  for (let i = 0; i < cc; i++) r.push(i);
+  let filmsInRaw = 12;
+  if (page == "Serials") filmsInRaw = 6;
+  else if (page == "Films") filmsInRaw = 8;
+  for (let i = 0; i < filmsInRaw; i++) r.push(i);
   return (
     <div className="wrapper">
-      {/* {open&&"test"} */}
-      <Modal
-        keepMounted
+      <WatchFilm
+        setLiked={setLiked}
+        liked={liked}
+        setMyList={setMyList}
+        myList={myList}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-        style={{ overflowY: "auto" }}>
-        <Box sx={style}>
-          <div>
-            <img
-              src={film && film[0].img}
-              style={{
-                width: "calc(100% + 62px)",
-                marginLeft: "-31px",
-                marginTop: "-27px",
-                height: "400px",
-              }}
-            />
-            <div
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1))",
-                width: "100%",
-                marginLeft: "-31px",
-                top: "156px",
-                height: "250px",
-                opacity: "0.9",
-                position: "absolute",
-              }}></div>
-            <Button
-              style={{
-                position: "absolute",
-                top: "350px",
-                borderRadius: "100px",
-                zIndex:"5",
-              }}>
-              <img src={plus} width="60vw" zIndex="6" stryle={{position:"absolute"}}/>
-            </Button>
-          </div>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            {film && film[0].nameEng}
-          </Typography>
-          {film ? film[0].description : ""}
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />v
-          <br />
-          <br />1
-          <br />
-          <br />2
-          <br />
-          <br />3
-          <br />
-          <br />4
-          <br />
-          <br />5
-          <br />
-          <br />
-          <br />6
-          <br />
-          <br />
-          <br />7
-          <br />
-          <br />8
-          <br />v
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />v
-        </Box>
-      </Modal>
+        openVideo={openVideo}
+        handleClose={handleClose}
+        film={film}
+        lang={props.lang}
+        changeLang={props.changeLang}
+        text={props.text}
+      />
       <Top
-        currentProfile={props.currentProfile}
         images={props.images}
         page={page}
         setPage={setPage}
         setSect={setSect}
+        allFilms={allFilms}
       />
-      <TopFilm
-        FilmsInfo={props.FilmsInfo}
-        selectedFilm={props.selectedFilm}
-        setSelectedFilm={props.setSelectedFilm}
-      />
+      {page == "Home" && (
+        <TopFilm
+          setFilm={setFilm}
+          handleOpen={handleOpen}
+          setCurrentVideo={props.setCurrentVideo}
+          allFilms={typeof allFilms == "undefined" ? null : allFilms}
+          selectedFilm={props.selectedFilm}
+          setSelectedFilm={props.setSelectedFilm}
+        />
+      )}
       {(sect = 0)}
       {sections.map((e) => {
         let language = 1;
@@ -222,14 +172,14 @@ function Home(props) {
                   return (
                     <div>
                       <img
-                        id={sect}
                         onClick={(e) => {
-                          handleOpen();
+                          handleOpen(allFilms[e.target.id]);
                           setFilm([allFilms[e.target.id], e.target.id]);
                           WatchTheFilm(e.target.id);
                         }}
                         style={{ cursor: "pointer" }}
                         src={NextFilm(sect++)}
+                        id={sect - 1}
                         className="carousel-pic-container"
                       />
                     </div>

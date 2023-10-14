@@ -146,11 +146,14 @@ body {
   margin: auto;
 }
 
-.container-for-section{
+.container-for-section {
   margin-top: 1%;
 }
 
-.carousel-pic-container{
+.carousel-pic-container {
   width: 95%;
   height: 25vw;
+}
+.genreliketext{
+  color:rgba(255, 255, 255, 0.5);
 }

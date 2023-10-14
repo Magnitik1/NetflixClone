@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import s from "./editProfile.module.css";
-import pic from "../../MainPage/picsAndFonts/profilePic.jpg";
 import down from "../../MainPage/picsAndFonts/down.png";
 import { useNavigate } from "react-router-dom";
-// import temppic from `../../MainPage/picsAndFonts/${localStorage.getItem('profileImage')}.png`;
+import { Alert } from "@mui/material";
 
 const EditProfile = (props) => {
-  let [image, setImage] = useState(
-    "https://media.istockphoto.com/id/1393750072/vector/flat-white-icon-man-for-web-design-silhouette-flat-illustration-vector-illustration-stock.jpg?s=612x612&w=0&k=20&c=s9hO4SpyvrDIfELozPpiB_WtzQV9KhoMUP9R9gVohoU="
-  );
   let [prof, setProf] = useState("");
-  let [autoPlay, setAutoPlay] = useState([true, true]);
+  let [acc, setAcc] = useState("");
+  let [autoPlay, setAutoPlay] = useState([false, false]);
   let nav = useNavigate();
   let [tempName, setTempName] = useState(
-    localStorage.getItem("currentProfile")
+    localStorage.getItem("tempData") == "false"
+      ? localStorage.getItem("currentProfile") == "#create"
+        ? null
+        : localStorage.getItem("currentProfile")
+      : JSON.parse(localStorage.getItem("tempData")).name
   );
   let ChangeLanguage = (e) => {
     if (e === "English") {
@@ -23,23 +24,39 @@ const EditProfile = (props) => {
     }
   };
   async function getData() {
-    const response = await fetch("http://localhost:3000/api_profile", {
+    let tempdata = "";
+    if (localStorage.getItem("currentProfile") !== "#create") {
+      const response = await fetch("http://localhost:3000/api_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: localStorage.getItem("currentAccount"),
+          name: localStorage.getItem("currentProfile"),
+        }),
+      });
+      tempdata = await response.json();
+    }
+    const response1 = await fetch("http://localhost:3000/api_account", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: localStorage.getItem("currentAccount"),
-        name: localStorage.getItem("currentProfile"),
       }),
     });
-    let tempdata = await response.json();
+    let tempdata1 = await response1.json();
+    setAcc(tempdata1);
 
     if (localStorage.getItem("tempData") != "false") {
       setAutoPlay([
         JSON.parse(localStorage.getItem("tempData")).autoPlay0,
         JSON.parse(localStorage.getItem("tempData")).autoPlay1,
       ]);
+    } else if (tempdata === "") {
+      setAutoPlay(false, false);
     } else {
       setAutoPlay(tempdata.autoPlaySettings);
     }
@@ -56,20 +73,31 @@ const EditProfile = (props) => {
     getData();
     if (localStorage.getItem("currentProfile") == 0) return;
     document.getElementById("name").value =
-      localStorage.getItem("tempData") != "false"
-        ? JSON.parse(localStorage.getItem("tempData")).name
-        : localStorage.getItem("currentProfile");
+      localStorage.getItem("tempData") == "false"
+        ? localStorage.getItem("currentProfile") === "#create"
+          ? null
+          : localStorage.getItem("currentProfile")
+        : JSON.parse(localStorage.getItem("tempData")).name;
   }, []);
 
-  let img1 = prof ? prof.imgSrc : pic;
-  localStorage.setItem("profileImage", img1);
+  let img1 = prof ? prof.imgSrc : 0;
+  localStorage.setItem(
+    "profileImage",
+    localStorage.getItem("tempData") == "false"
+      ? img1
+      : localStorage.getItem("tempPic")
+  );
   return (
     <div className={s.edit_profile}>
       <a className={s.text}>{props.lang[44]}</a>
       <hr className={s.line} />
       <div className={s.img}>
         <img
-          src={localStorage.getItem("tempPic")?props.images[localStorage.getItem("tempPic")]:props.images[localStorage.getItem("profileImage")]}
+          src={
+            localStorage.getItem("tempPic")
+              ? props.images[localStorage.getItem("tempPic")]
+              : props.images[localStorage.getItem("profileImage")]
+          }
           className={s.profile_pic}
           onClick={() => {
             localStorage.setItem(
@@ -94,7 +122,9 @@ const EditProfile = (props) => {
             placeholder={props.lang[52]}
             style={{ color: "white" }}
             className={s.name}
-            onChange={(e) => setTempName(e.currentTarget.value)}
+            onChange={(e) => {
+              setTempName(e.currentTarget.value);
+            }}
           />
         </form>
         <br />
@@ -178,10 +208,56 @@ const EditProfile = (props) => {
         <input
           onClick={async () => {
             //save
-            if (tempName.trim() === "") {
+            tempName += "";
+            tempName = tempName.trim();
+            let prap = 0;
+            acc.users.map((e) => {
+              if (
+                e.name === tempName &&
+                localStorage.getItem("currentProfile") !== tempName
+              ) {
+                prap = 1;
+                return;
+              }
+              console.log(e.imgSrc);
+
+              if (
+                e.imgSrc === localStorage.getItem("profileImage") &&
+                e.name !== tempName
+              ) {
+                prap = 2;
+                return;
+              }
+            });
+            if (prap === 1) {
+              alert("This Username is already taken!");
+              <Alert variant="outlined" severity="error">
+                This is an error alert — check it out!
+              </Alert>;
               return;
             }
-            if (localStorage.getItem("currentProfile") == "") {
+            if (prap === 2) {
+              alert("This Picture is already taken!");
+              <Alert variant="outlined" severity="error">
+                This is an error alert — check it out!
+              </Alert>;
+              return;
+            }
+            if (
+              localStorage.getItem("currentProfile") == "0" &&
+              localStorage.getItem("tempPic") > 0 &&
+              localStorage.getItem("tempPic") <= props.images.length
+            ) {
+            }
+            if (
+              tempName === "" ||
+              tempName === "#create" ||
+              localStorage.getItem("profileImage") == "0"
+            ) {
+              return;
+            }
+
+            if (localStorage.getItem("currentProfile") === "#create") {
               fetch("http://localhost:3000/process_post_profile", {
                 method: "POST",
                 headers: {
@@ -231,6 +307,10 @@ const EditProfile = (props) => {
         <input
           onClick={async () => {
             //delete
+            if (localStorage.getItem("currentProfile") === "#create") {
+              nav("/selectProfile");
+              return;
+            }
             fetch("http://localhost:3000/process_remove_profile", {
               method: "POST",
               headers: {

@@ -7,15 +7,6 @@
   opacity: 0.9;
 }
 
-.settings-list {
-  position: absolute;
-  width: 0px;
-  right: 10px;
-  top: 55px;
-  background-color: black;
-  color: white;
-  z-index: 5;
-}
 
 .settings-list-conteiner {
   cursor: pointer;
@@ -38,3 +29,105 @@
 .justUl li:hover{
     opacity: 0.8;
 }
+
+
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.search-btn:focus {
+  outline: none;
+}
+
+.search-btn svg {
+  color: #f34242;
+  font-size: 1.2rem;
+}
+
+.search-container {
+  position: absolute;
+  right: 128px;
+}
+
+
+.search {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  padding-left: 0.5rem;
+  background-color: transparent; /* Изменяем цвет фона */
+  border-radius: 3px; /* Добавляем скругление углов */
+  transition: background-color 0.3s ease-in-out; /* Добавляем анимацию для фона */
+  max-width: 200px;
+}
+
+.search button {
+  background-color: transparent;
+  cursor: pointer
+}
+
+.search-input {
+width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+  background-color: transparent;
+  border: none;
+  color: white;
+
+}
+
+search-input:focus {
+  outline: none;
+}
+
+
+.show-search {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.show-search input {
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  padding: 0.3rem;
+}
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px); /* Перемещаем результаты поиска под строку поиска */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none; /* Начально скрываем результаты поиска */
+  z-index: 1; /* Поднимаем результаты поиска над другими элементами */
+}
+.show-search .search-results {
+  display: block; /* Показываем результаты поиска, когда строка поиска в фокусе */
+}
+.search-results ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.search-results li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.search-results li:hover {
+  background-color: #f0f0f0;
+}
+

@@ -1,15 +1,28 @@
-.select-profiles{
-    background-color: var(--background);
-    width: 100vw;
-    position: absolute;
-    left:8px;
-    height: 100vh;
+.select-profiles {
+  width: 75vw;
+  left: 10vw;
+  background-color: var(--background);
+  position: absolute;
+  top: 30vh;
+  height: 70vh;
+  align-content: center;
+  text-align: center;
 }
 
-.select-profiles-text{
-    color: var(--main-text);
+.profiles-conteiner {
+  display: flex;
 }
 
-.profiles-conteiner{
-    display: flex;
+.backBtn {
+  background: rgba(0, 0, 0, 0.4);
+  line-height: 100%;
+  --blur: 15px;
+  --spread: 10px;
+  --grad: transparent calc(var(--spread)),
+    #fff calc(var(--spread) + var(--blur)),
+    #fff calc(100% - (var(--spread) + var(--blur))),
+    transparent calc(100% - var(--spread));
+  mask-image: linear-gradient(to right, var(--grad)),
+    linear-gradient(to bottom, var(--grad));
+  mask-composite: intersect;
 }

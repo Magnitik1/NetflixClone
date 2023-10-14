@@ -14,10 +14,33 @@ export default function ButtonAppBar(props) {
   let nav = useNavigate();
   let [myPic, setMyPic] = useState(null);
   let [others, setOthers] = useState(null);
-  let [visibility, setVisibility] = useState(false);
   const [miniOpen, setMiniOpen] = React.useState(false);
+  const [bellOpen, setBellOpen] = React.useState(false);
+  const handleBellOpen = () => setBellOpen(true);
   const handleMiniOpen = () => setMiniOpen(true);
-  const handleMiniClose = () => setMiniOpen(false);
+  const handleBellClose = () => setBellOpen(false);
+  const handleMiniClose = () => setMiniOpen(false);  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+
+  const [showSearch, setShowSearch] = useState(false);
+
+
+  const [inputHover, setInputHover] = useState(false);
+  
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    console.log(query)
+    setSearchQuery(query);
+    if (Array.isArray(props.allFilms)) {
+      const filteredResults = props.allFilms.filter((film) =>
+      film.nameEng.toLowerCase().includes(query.toLowerCase())
+      );
+      console.log(filteredResults)
+      setSearchResults(filteredResults);
+    }
+  };
 
   let tempdata = null;
   useEffect(() => {
@@ -64,10 +87,36 @@ export default function ButtonAppBar(props) {
     container();
   }, []);
 
+  const styleOfChoosen={
+    background:"linear-gradient(180deg, #FFC107 0%, #FFEE46 100%)",
+    height:"64px",
+    color: "black",
+    textTransform: "none",
+    borderRadius:"0",
+  }
+  const styleOfNotChoosen={
+    height:"64px",
+    color: "inherit",
+    textTransform: "none",
+    borderRadius:"0",
+  }
   const miniStyle = {
     position: "absolute",
-    top: "233px",
+    top: "60px",
     right: "-84px",
+    transform: "translate(-50%, 0%)",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    display: "block",
+    backgroundColor: "black",
+    textAling: "center",
+  };
+  const bellStyle = {
+    position: "absolute",
+    top: "230px",
+    right: "30px",
     transform: "translate(-50%, -50%)",
     bgcolor: "background.paper",
     border: "2px solid #000",
@@ -77,16 +126,9 @@ export default function ButtonAppBar(props) {
     backgroundColor: "black",
     textAling: "center",
   };
-
   return (
     <>
-      <Modal
-        keepMounted
-        open={miniOpen}
-        onClose={handleMiniClose}
-        // aria-labelledby="keep-mounted-modal-title"
-        // aria-describedby="keep-mounted-modal-description"
-      >
+      <Modal keepMounted open={miniOpen} onClose={handleMiniClose}>
         <Box sx={miniStyle} style={{ padding: "0", borderColor: "black" }}>
           <ul style={{ listStyleType: "none" }} className="justUl">
             {others !== null
@@ -146,6 +188,13 @@ export default function ButtonAppBar(props) {
           </ul>
         </Box>
       </Modal>
+      <Modal keepMounted open={bellOpen} onClose={handleBellClose}>
+        <Box
+          sx={bellStyle}
+          style={{ padding: "0", borderColor: "black", height: "300px" }}>
+          <a style={{ color: "white" }}>Some News</a>
+        </Box>
+      </Modal>
       <Box
         style={{
           position: "fixed",
@@ -171,47 +220,78 @@ export default function ButtonAppBar(props) {
               </IconButton>
             </Link>
             <Button
-              style={{ textTransform: "none", color: "inherit" }}
+              style={props.page=="Home"?styleOfChoosen:styleOfNotChoosen}
               onClick={() => {
-                props.setSect()
+                props.setSect();
                 props.setPage("Home");
-                console.log("Home")
               }}>
               Головна
             </Button>
-            <Button style={{ textTransform: "none", color: "inherit" }} onClick={() => {
-                props.setSect()
+            <Button
+              style={props.page=="Serials"?styleOfChoosen:styleOfNotChoosen}
+              onClick={() => {
+                props.setSect();
                 props.setPage("Serials");
               }}>
               Серіали
             </Button>
-            <Button style={{ textTransform: "none", color: "inherit" }} onClick={() => {
-              props.setSect()
+            <Button
+              style={props.page=="Films"?styleOfChoosen:styleOfNotChoosen}
+              onClick={() => {
+                props.setSect();
                 props.setPage("Films");
               }}>
               Фільми
             </Button>
-            <Button style={{ textTransform: "none", color: "inherit" }} onClick={() => {
-              props.setSect()
-                props.setPage("Home");
+            <Button
+              style={props.page=="New and Popular"?styleOfChoosen:styleOfNotChoosen}
+              onClick={() => {
+                props.setSect();
+                props.setPage("New and Popular");
               }}>
               Новинки і популярне
             </Button>
-            <Button style={{ textTransform: "none", color: "inherit" }} onClick={() => {
-              props.setSect()
+            <Button
+              style={props.page=="My List"?styleOfChoosen:styleOfNotChoosen}
+              onClick={() => {
+                props.setSect();
                 props.setPage("My List");
               }}>
               Мій список
             </Button>
             {myPic}
+            <div className="search-container">
+              <div className={`search ${showSearch ? "show-search" : ""}`}>
+                <Button
+                  className="search-btn"
+                  onFocus={() => setShowSearch(true)}
+                  onBlur={() => {
+                    if (!inputHover) setShowSearch(false);
+                  }}>
+                  <img src={Search} alt="search" />
+                </Button>
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search"
+                  onMouseEnter={() => setInputHover(true)}
+                  onMouseLeave={() => setInputHover(false)}
+                  onBlur={() => {
+                    setShowSearch(false);
+                    setInputHover(false);
+                  }}
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            
             <Button
+              onClick={() => {
+                handleBellOpen();
+              }}
               color="inherit"
-              style={{ position: "absolute", right: "135px" }}>
-              <img src={Search} alt="search" />
-            </Button>
-            <Button
-              color="inherit"
-              style={{ position: "absolute", right: "80px" }}>
+              style={{ position: "absolute", right: "85px" }}>
               <img src={Bell} alt="bell" />
             </Button>
             <div

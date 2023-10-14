@@ -29,8 +29,8 @@ const LogIn = (props) => {
             Login with Facebook
           </label>
         </div>
-        <p className="new-to-netflix">
-          New to Netflix? <Link to="/SingUp">Sign up now</Link>
+        <p className="new-to-flixua">
+          New to FlixUA? <Link to="/SingUp">Sign up now</Link>
         </p>
         <p className="recaptcha-text">
           This page is protected by Google reCAPTCHA to ensure you’re not a bot.
@@ -39,7 +39,7 @@ const LogIn = (props) => {
         <div className="divider"></div>
         <div className="login-options">
           <span>Need help?</span>
-          <span>© 2023 Netflix, Inc.</span>
+          <span>© 2023 FlixUA, Inc.</span>
         </div>
       </div>
       <Footer
